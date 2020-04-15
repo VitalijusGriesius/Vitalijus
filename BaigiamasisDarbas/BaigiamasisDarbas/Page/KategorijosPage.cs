@@ -11,22 +11,20 @@ namespace BaigiamasisDarbas.Page
     {
         public KategorijosPage(IWebDriver driver) : base(driver) { }
 
-        private IWebElement Kategorijos => driver.FindElement(By.CssSelector(".widget-title"));
-        private SelectElement KategorijosSelectElement => new SelectElement(Kategorijos);
-        private IWebElement ForexTestaiPuslapis => driver.FindElement(By.CssSelector(".cat-item cat-item-191 current-cat"));
-        private IWebElement ForexPradziaPuslapis => driver.FindElement(By.Id("menu-item-9198"));
-        private IWebElement PradziaButton => driver.FindElement(By.Id("menu-item-9198"));
+        private IWebElement KategorijosIndikatoriai => driver.FindElement(By.LinkText("Forex indikatoriai"));
+        private IWebElement ForexIndikatoriuPuslapis => driver.FindElement(By.CssSelector("div#content h1"));
+        private IWebElement PradziaButton => driver.FindElement(By.LinkText("Pradžia"));
 
 
-        public KategorijosPage SelectForexTestai()
+        public KategorijosPage SelectForexIndikatoriai()
         {
-            KategorijosSelectElement.SelectByIndex(6);
+            KategorijosIndikatoriai.Click();
             return this;
         }
 
-        public KategorijosPage AssertCorrectPageTestai()
+        public KategorijosPage AssertCorrectPageIndikatoriai(string text)
         {
-            Assert.AreEqual("http://spekuliantas.com/category/testai/", ForexTestaiPuslapis);
+            Assert.AreEqual(text, ForexIndikatoriuPuslapis);
             return this;
         }
 
@@ -35,9 +33,9 @@ namespace BaigiamasisDarbas.Page
             PradziaButton.Click();
             return this;
         }
-        public KategorijosPage AssertCorrectPagePradzia()
+        public KategorijosPage AssertCorrectPagePradzia(string URL)
         {
-            Assert.AreEqual("http://spekuliantas.com/", ForexTestaiPuslapis);
+            Assert.AreEqual(URL, PradziaButton);
             return this;
         }
 

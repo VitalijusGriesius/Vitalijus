@@ -25,12 +25,10 @@ namespace BaigiamasisDarbas.Tests
         {
             searchField.Click();
             searchField.SendKeys("*");
-            Actions builder = new Actions(driver);
-            builder.SendKeys(Keys.Enter);
-            builder.Build().Perform();
 
-            new WebDriverWait(driver, TimeSpan.FromSeconds(30)).
-                Until(d => searchResulBloga.Text == "Nepavyko rasti");
+            searchField.SendKeys(Keys.Enter);
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
             Assert.AreEqual("Nepavyko rasti", searchResulBloga.Text);
         }
@@ -38,16 +36,15 @@ namespace BaigiamasisDarbas.Tests
         [Test]
         public void TestSearchGeraReiksme()
         {
+            string searchText = "EUR/USD"; // Rasyti didziosiomis raidemis
             searchField.Click();
-            searchField.SendKeys("eur/usd");
-            Actions builder = new Actions(driver);
-            builder.SendKeys(Keys.Enter);
-            builder.Build().Perform();
+            searchField.SendKeys(searchText);
+            
+            searchField.SendKeys(Keys.Enter);
 
-            new WebDriverWait(driver, TimeSpan.FromSeconds(30)).
-                Until(d => searchResultGera.Text == "PAIEŠKOS REZULTATAI: EUR/USD");
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
-            Assert.AreEqual("PAIEŠKOS REZULTATAI: EUR/USD", searchResultGera.Text);
+            Assert.AreEqual($"PAIEŠKOS REZULTATAI: {searchText}", searchResultGera.Text);
         }
     }
 }

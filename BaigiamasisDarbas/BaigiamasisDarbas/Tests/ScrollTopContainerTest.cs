@@ -24,7 +24,6 @@ namespace BaigiamasisDarbas.Tests
             Actions builder = new Actions(driver);
             builder.SendKeys(Keys.PageDown);
             builder.Build().Perform();
-            ScrollTopContainer.Click();
 
             Assert.IsTrue(ScrollTopContainer.Displayed);
         }

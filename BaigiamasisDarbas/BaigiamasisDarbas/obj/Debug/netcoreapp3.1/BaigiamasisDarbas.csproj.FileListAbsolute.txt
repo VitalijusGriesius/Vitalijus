@@ -93,6 +93,9 @@ C:\Users\vital\source\repos\BaigiamasisDarbas\BaigiamasisDarbas\obj\Debug\netcor
 C:\Users\vital\source\repos\BaigiamasisDarbas\BaigiamasisDarbas\bin\Debug\netcoreapp3.1\WebDriver.dll
 C:\Users\vital\source\repos\BaigiamasisDarbas\BaigiamasisDarbas\bin\Debug\netcoreapp3.1\WebDriver.Support.dll
 C:\Users\vital\source\repos\BaigiamasisDarbas\BaigiamasisDarbas\bin\Debug\netcoreapp3.1\BaigiamasisDarbas.pdb
-C:\Users\vital\source\repos\BaigiamasisDarbas\BaigiamasisDarbas\obj\Debug\netcoreapp3.1\BaigiamasisDarbas.csproj.CoreCompileInputs.cache
 C:\Users\vital\source\repos\BaigiamasisDarbas\BaigiamasisDarbas\obj\Debug\netcoreapp3.1\BaigiamasisDarbas.dll
 C:\Users\vital\source\repos\BaigiamasisDarbas\BaigiamasisDarbas\obj\Debug\netcoreapp3.1\BaigiamasisDarbas.pdb
+C:\Users\vital\source\repos\BaigiamasisDarbas\BaigiamasisDarbas\bin\Debug\netcoreapp3.1\Allure.Commons.dll
+C:\Users\vital\source\repos\BaigiamasisDarbas\BaigiamasisDarbas\bin\Debug\netcoreapp3.1\MimeTypesMap.dll
+C:\Users\vital\source\repos\BaigiamasisDarbas\BaigiamasisDarbas\bin\Debug\netcoreapp3.1\NUnit.Allure.dll
+C:\Users\vital\source\repos\BaigiamasisDarbas\BaigiamasisDarbas\obj\Debug\netcoreapp3.1\BaigiamasisDarbas.csproj.CoreCompileInputs.cache

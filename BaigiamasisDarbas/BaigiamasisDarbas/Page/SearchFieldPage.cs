@@ -19,18 +19,14 @@ namespace BaigiamasisDarbas.Page
         {
             searchField.Click();
             searchField.SendKeys(text);
-            Actions builder = new Actions(driver);
-            builder.SendKeys(Keys.Enter);
-            builder.Build().Perform();
+            searchField.SendKeys(Keys.Enter);
             return this;
         }
         public SearchFieldPage IvestiGeraReiksme(string text)
         {
             searchField.Click();
             searchField.SendKeys(text);
-            Actions builder = new Actions(driver);
-            builder.SendKeys(Keys.Enter);
-            builder.Build().Perform();
+            searchField.SendKeys(Keys.Enter);
             return this;
         }
         public SearchFieldPage AssertSearchReiksmeBloga(string text)
