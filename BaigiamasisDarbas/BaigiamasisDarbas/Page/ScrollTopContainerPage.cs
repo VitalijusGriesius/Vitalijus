@@ -10,6 +10,7 @@ namespace BaigiamasisDarbas.Page
     public class ScrollTopContainerPage : BasePage
     {
         private IWebElement ScrollTopContainer => driver.FindElement(By.Id("wpfront-scroll-top-container"));
+
         public ScrollTopContainerPage(IWebDriver driver) : base(driver) { }
 
         public ScrollTopContainerPage PageDown()
@@ -19,13 +20,8 @@ namespace BaigiamasisDarbas.Page
             builder.Build().Perform();
             return this;
         }
-        public ScrollTopContainerPage ScrollTop()
-        {
-            ScrollTopContainer.Click();
-            return this;
-        }
 
-        public ScrollTopContainerPage AssertScrollTop()
+        public ScrollTopContainerPage AssertIsScrollTop()
         {
             Assert.IsTrue(ScrollTopContainer.Displayed);
             return this;

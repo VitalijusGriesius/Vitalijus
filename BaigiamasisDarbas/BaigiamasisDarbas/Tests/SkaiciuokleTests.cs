@@ -12,26 +12,20 @@ namespace BaigiamasisDarbas.Tests
     public class SkaiciuokleTests : BaseTests
     {
 
-        private IWebElement SwapRiskMoneyButton => driver.FindElement(By.Id("swapriskmoney"));
-        private IWebElement DepozitoValiuta => driver.FindElement(By.Id("currency"));
-        private IWebElement ValiutuPora => driver.FindElement(By.Id("pair"));
-        private IWebElement DepozitoDydisField => driver.FindElement(By.Id("size"));
-        private IWebElement RizikaField => driver.FindElement(By.Id("risk"));
-        private IWebElement StopLossField => driver.FindElement(By.Id("stop"));
-        private IWebElement AskPriceField => driver.FindElement(By.Id("price"));
-        private IWebElement SkaiciuotiButton => driver.FindElement(By.CssSelector("input[value=Skaičiuoti]"));
-        private IWebElement RizikosDydis => driver.FindElement(By.Name("money"));
-        
+        private SkaiciuoklePage skaiciuoklePage;
+
+
         [SetUp]
         public void BeforeTest()
         {
             driver.Url = "http://spekuliantas.com/fx_skaiciuoklis.php";
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
+            skaiciuoklePage = new SkaiciuoklePage(driver);
         }
 
         [Test]
-        public void SkaiciuoklesRezultatas()
+        public void CountRiskSize()
         {
             var depozitoDydis = "1500";
             var RizikaPinigais = "280";
@@ -39,25 +33,16 @@ namespace BaigiamasisDarbas.Tests
             var AskPrice = "1.3458";
             var RizikosDydisProc = "18.67";
 
-            new SelectElement(DepozitoValiuta).SelectByIndex(2);
-            new SelectElement(ValiutuPora).SelectByIndex(1);
+            skaiciuoklePage
+                .SelectCurrency()
+                .ClickSwapRiskMOneyButton()
+                .EnterTextInSizeField(depozitoDydis)
+                .EnterTextInRiskField(RizikaPinigais)
+                .EnterTextInStopLossField(StopLoss).SelectPair()
+                .EnterTextInAskPriceField(AskPrice)
+                .ClickCalculateRezult();
 
-            SwapRiskMoneyButton.Click();
-
-            DepozitoDydisField.Clear();
-            DepozitoDydisField.SendKeys(depozitoDydis);
-
-            RizikaField.Clear();
-            RizikaField.SendKeys(RizikaPinigais);
-            
-            StopLossField.Clear();
-            StopLossField.SendKeys(StopLoss);
-            
-            AskPriceField.Clear();
-            AskPriceField.SendKeys(AskPrice);
-            SkaiciuotiButton.Click();
-
-            Assert.AreEqual(RizikosDydisProc,RizikosDydis.GetAttribute("value"));
+            skaiciuoklePage.AssertResult(RizikosDydisProc);
         }
     }
 }

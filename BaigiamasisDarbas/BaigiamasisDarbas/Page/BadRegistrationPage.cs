@@ -8,8 +8,6 @@ namespace BaigiamasisDarbas.Page
 {
    public class BadRegistrationPage : BasePage
     {
-        public BadRegistrationPage(IWebDriver driver) : base(driver) { }
-
         private IWebElement SubmitButton => driver.FindElement(By.Name("accept_agreement"));
         private IWebElement NaudotojoVardasField => driver.FindElement(By.Id("smf_autov_username"));
         private IWebElement ElPastasField => driver.FindElement(By.Name("email"));
@@ -20,49 +18,52 @@ namespace BaigiamasisDarbas.Page
         private IWebElement RegistruotisButton => driver.FindElement(By.Name("regSubmit"));
         private IWebElement RegistrationError => driver.FindElement(By.ClassName("register_error"));
 
+        public BadRegistrationPage(IWebDriver driver) : base(driver) { }
+
+
         public BadRegistrationPage StartRegistration()
         {
             SubmitButton.Click();
             return this;
         }
-        public BadRegistrationPage EnterTextInNaudotojoVardasField(string text)
+        public BadRegistrationPage EnterTextInUserNameField(string text)
         {
             NaudotojoVardasField.SendKeys(text);
             return this;
         }
-        public BadRegistrationPage EnterTextInElPastasField(string text)
+        public BadRegistrationPage EnterTextInEMailField(string text)
         {
             ElPastasField.SendKeys(text);
             return this;
         }
-        public BadRegistrationPage EnterTextInPasirinkSlaptazodiField(string text)
+        public BadRegistrationPage EnterTextInPasswordField(string text)
         {
             PasirinkiteSlaptazodiField.SendKeys(text);
             return this;
         }
-        public BadRegistrationPage EnterTextInPatvirtinkSlaptazodiField(string text)
+        public BadRegistrationPage EnterTextInPassword2Field(string text)
         {
             PatvirkinkiteSlaptazodiField.SendKeys(text);
             return this;
         }
-        public BadRegistrationPage EnterTextInParodytosRaidesField(string text)
+        public BadRegistrationPage EnterTextInLettersField(string text)
         {
             ParodytosRaidesField.SendKeys(text);
             return this;
         }
-        public BadRegistrationPage EnterTextInPatikrinimoDaugybaField(string number)
+        public BadRegistrationPage EnterTextInNumberField(string number)
         {
             PatikrinimoDaugybaField.SendKeys(number);
             return this;
         }
-        public BadRegistrationPage ClickRegistruotisButton()
+        public BadRegistrationPage ClickRegistrationButton()
         {
             RegistruotisButton.Click();
             return this;
         }
         public BadRegistrationPage AssertIsBadRegistration(string text)
         {
-            Assert.AreEqual(text, RegistrationError);
+            Assert.AreEqual(text, RegistrationError.Text);
             return this;
         }
 

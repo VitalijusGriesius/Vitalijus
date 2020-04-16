@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using BaigiamasisDarbas.Page;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System;
@@ -9,23 +10,23 @@ namespace BaigiamasisDarbas.Tests
 {
     public class ScrollTopContainerTest : BaseTests
     {
-        private IWebElement ScrollTopContainer => driver.FindElement(By.Id("wpfront-scroll-top-container"));
-        
+        private ScrollTopContainerPage scrollTopContainerPage;
+
         [SetUp]
         public void BeforeTest()
         {
             driver.Url = "http://spekuliantas.com/";
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+
+            scrollTopContainerPage = new ScrollTopContainerPage(driver);
         }
 
         [Test]
-        public void CheckScrollTopButton()
+        public void AssertIsScrollTopDisplayed()
         {
-            Actions builder = new Actions(driver);
-            builder.SendKeys(Keys.PageDown);
-            builder.Build().Perform();
+            scrollTopContainerPage.PageDown();
 
-            Assert.IsTrue(ScrollTopContainer.Displayed);
+            scrollTopContainerPage.AssertIsScrollTop();
         }
     }
 }

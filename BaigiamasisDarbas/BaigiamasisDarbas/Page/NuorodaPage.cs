@@ -8,12 +8,13 @@ namespace BaigiamasisDarbas.Page
 {
     public class NuorodaPage : BasePage
     {
-        public NuorodaPage(IWebDriver driver) : base(driver) { }
 
         private IWebElement NuorodaBitcoin => driver.FindElement(By.LinkText("Bitcoin"));
         private IWebElement Pavadinimas => driver.FindElement(By.CssSelector(".entry-title"));
 
-        public NuorodaPage NuorodaBitcoinClick()
+        public NuorodaPage(IWebDriver driver) : base(driver) { }
+
+        public NuorodaPage LinkBitcoinClick()
         {
             NuorodaBitcoin.Click();
             return this;

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using BaigiamasisDarbas.Page;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
@@ -9,25 +10,27 @@ namespace BaigiamasisDarbas.Tests
 {
     public class ValiutaTests : BaseTests
     {
-        private IWebElement Valiuta => driver.FindElement(By.Id("currency"));
-        private IWebElement SwapRiskMoneyButton => driver.FindElement(By.Id("swapriskmoney"));
-        private IWebElement ValiutaDisplayed => driver.FindElement(By.Id("moneyt2"));
+
+        private ValiutaPage valiutaPage;
 
         [SetUp]
         public void BeforeTest()
         {
             driver.Url = "http://spekuliantas.com/fx_skaiciuoklis.php";
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+
+            valiutaPage = new ValiutaPage(driver);
         }
 
         [Test]
-        public void PasirinktaValiuta()
+        public void SelectCurrency()
         {
-            SwapRiskMoneyButton.Click();
+            valiutaPage
+                .RiskMoneyButton()
+                .SelectValiuta();
 
-            new SelectElement(Valiuta).SelectByIndex(3);
+            valiutaPage.AssertSelectValiuta("Pinigai, JPY");
 
-            Assert.AreEqual("Pinigai, JPY", ValiutaDisplayed.Text);
         }
     }
 }

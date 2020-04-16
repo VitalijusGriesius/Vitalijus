@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using BaigiamasisDarbas.Page;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -9,15 +10,16 @@ namespace BaigiamasisDarbas.Tests
 {
    public class CheckNaudotojoVardasTests : BaseTests
     {
-        private IWebElement SubmitButton => driver.FindElement(By.Name("accept_agreement"));
-        private IWebElement NaudotojoVardasField => driver.FindElement(By.Id("smf_autov_username"));
-        private IWebElement Check => driver.FindElement(By.Id("smf_autov_username_img"));
+
+        private CheckNaudotojoVardasPage checkNaudotojoVardasPage;
 
         [SetUp]
         public void BeforeTest()
         {
             driver.Url = "http://spekuliantas.com/forum/index.php?action=register";
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+
+            checkNaudotojoVardasPage = new CheckNaudotojoVardasPage(driver);
         }
 
         [Test]
@@ -27,22 +29,13 @@ namespace BaigiamasisDarbas.Tests
             string laisvas = "Naudotojo vardas laisvas";
             string uzimtas = "Naudotojo vardas užimtas";
 
-            SubmitButton.Click();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 
-            NaudotojoVardasField.SendKeys(naudotojoVardas);
+            checkNaudotojoVardasPage
+                .StartRegistration()
+                .EnterUserName(naudotojoVardas)
+                .ClickCheckButton();
 
-            Check.Click();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-
-            if (Check.GetAttribute("title") == laisvas)
-            {
-                Assert.True(laisvas.Contains("laisvas"));
-            }
-            else if (Check.GetAttribute("title") == uzimtas)
-            {
-                Assert.False(laisvas.Contains("užimtas"));
-            }
+            checkNaudotojoVardasPage.AssertIsUsedUserName(laisvas, uzimtas);
         }
     }
 }

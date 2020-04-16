@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using BaigiamasisDarbas.Page;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -8,26 +9,29 @@ namespace BaigiamasisDarbas.Tests
 {
     public class NuorodaTests : BaseTests
     {
-        private IWebElement NuorodaBitcoin => driver.FindElement(By.LinkText("Bitcoin"));
-        private IWebElement Pavadinimas => driver.FindElement(By.CssSelector(".entry-title"));
+
+        private NuorodaPage nuorodaPage;
+
 
         [SetUp]
         public void BeforeTest()
         {
             driver.Url = "http://spekuliantas.com/brokeriai/";
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+
+            nuorodaPage = new NuorodaPage(driver);
         }
 
         [Test]
 
-        public void ArGeraNuoroda()
+        public void AssertIsCorrectBitcoinLink()
         {
             string tekstas = "Bitkoinai – ką žinome apie kriptovaliutą";
-            NuorodaBitcoin.Click();
 
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            nuorodaPage.LinkBitcoinClick();
 
-            Assert.AreEqual(tekstas, Pavadinimas.Text);
+            nuorodaPage.AssertIsCorrectLink(tekstas);
+
         }
     }
 }

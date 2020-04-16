@@ -15,26 +15,26 @@ namespace BaigiamasisDarbas.Page
 
         public SearchFieldPage(IWebDriver driver) : base(driver) { }
 
-        public SearchFieldPage IvestiBlogaReiksme(string text)
+        public SearchFieldPage EnterBadValue(string text)
         {
             searchField.Click();
             searchField.SendKeys(text);
             searchField.SendKeys(Keys.Enter);
             return this;
         }
-        public SearchFieldPage IvestiGeraReiksme(string text)
-        {
-            searchField.Click();
-            searchField.SendKeys(text);
-            searchField.SendKeys(Keys.Enter);
-            return this;
-        }
-        public SearchFieldPage AssertSearchReiksmeBloga(string text)
+        public SearchFieldPage AssertSearchBadValue(string text)
         {
             Assert.AreEqual(text, searchResulBloga.Text);
             return this;
         }
-        public SearchFieldPage AssertSearchReiksmeGera(string text)
+        public SearchFieldPage EnterGoodValue(string text)
+        {
+            searchField.Click();
+            searchField.SendKeys(text);
+            searchField.SendKeys(Keys.Enter);
+            return this;
+        }
+        public SearchFieldPage AssertSearchGoodValue(string text)
         {
             Assert.AreEqual(text, searchResultGera.Text);
             return this;

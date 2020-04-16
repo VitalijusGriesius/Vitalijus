@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using BaigiamasisDarbas.Page;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
@@ -10,41 +11,40 @@ namespace BaigiamasisDarbas.Tests
 {
     public class SearchFieldTests : BaseTests
     {
-        private IWebElement searchField => driver.FindElement(By.Id("s"));
-        private IWebElement searchResultGera => driver.FindElement(By.CssSelector(".page-title"));
-        private IWebElement searchResulBloga => driver.FindElement(By.CssSelector(".entry-title"));
+
+        private SearchFieldPage searchFieldPage;
+
 
         [SetUp]
         public void BeforeTest()
         {
             driver.Url = "http://spekuliantas.com/";
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+
+            searchFieldPage = new SearchFieldPage(driver);
         }
+
         [Test]
-        public void TestSearchBlogaReiksme()
+        public void TestSearchBadValue()
         {
-            searchField.Click();
-            searchField.SendKeys("*");
+            string badValue = "*";
+            string NotFind = "Nepavyko rasti";
 
-            searchField.SendKeys(Keys.Enter);
+            searchFieldPage.EnterBadValue(badValue);
 
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-
-            Assert.AreEqual("Nepavyko rasti", searchResulBloga.Text);
+            searchFieldPage.AssertSearchBadValue(NotFind);
         }
 
         [Test]
-        public void TestSearchGeraReiksme()
+        public void TestSearchGoodValue()
         {
             string searchText = "EUR/USD"; // Rasyti didziosiomis raidemis
-            searchField.Click();
-            searchField.SendKeys(searchText);
-            
-            searchField.SendKeys(Keys.Enter);
+            string result = "PAIEŠKOS REZULTATAI: EUR/USD";
 
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            searchFieldPage.EnterGoodValue(searchText);
 
-            Assert.AreEqual($"PAIEŠKOS REZULTATAI: {searchText}", searchResultGera.Text);
+            searchFieldPage.AssertSearchGoodValue(result);
+
         }
     }
 }

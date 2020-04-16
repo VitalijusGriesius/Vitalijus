@@ -9,14 +9,15 @@ namespace BaigiamasisDarbas.Page
 {
    public class KategorijosPage : BasePage
     {
-        public KategorijosPage(IWebDriver driver) : base(driver) { }
 
         private IWebElement KategorijosIndikatoriai => driver.FindElement(By.LinkText("Forex indikatoriai"));
         private IWebElement ForexIndikatoriuPuslapis => driver.FindElement(By.CssSelector("div#content h1"));
         private IWebElement PradziaButton => driver.FindElement(By.LinkText("Pradžia"));
 
+        public KategorijosPage(IWebDriver driver) : base(driver) { }
 
-        public KategorijosPage SelectForexIndikatoriai()
+
+        public KategorijosPage ClickForexIndikatoriai()
         {
             KategorijosIndikatoriai.Click();
             return this;
@@ -24,7 +25,7 @@ namespace BaigiamasisDarbas.Page
 
         public KategorijosPage AssertCorrectPageIndikatoriai(string text)
         {
-            Assert.AreEqual(text, ForexIndikatoriuPuslapis);
+            Assert.AreEqual(text, ForexIndikatoriuPuslapis.Text);
             return this;
         }
 
@@ -35,7 +36,7 @@ namespace BaigiamasisDarbas.Page
         }
         public KategorijosPage AssertCorrectPagePradzia(string URL)
         {
-            Assert.AreEqual(URL, PradziaButton);
+            Assert.AreEqual(URL,"http://spekuliantas.com/");
             return this;
         }
 
